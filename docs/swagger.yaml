@@ -1,0 +1,226 @@
+swagger: '2.0'
+info:
+  version: 1.0.1 Beta
+  title: 'Api Article Free'
+  description: 'Api for article'
+  termsOfService: terms
+  contact:
+    name: 'farhan'
+    url: 'http://opensource.org/licenses/MIT'
+    email: 'farhanrafid97@gmail.com'
+  license:
+    name: farhan
+    url: http://opensource.org/licenses/MIT
+tags:
+  - name: 'Article'
+    description: 'end point for article'
+
+paths:
+  /articles:
+    get:
+      tags:
+        - 'Article'
+      summary: 'list all article'
+      description: 'get all article'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: 'array'
+            items:
+              type: 'object'
+              properties:
+                id:
+                  type: 'integer'
+                  example: 1
+                title:
+                  type: 'string'
+                  example: 'title'
+                text:
+                  type: 'string'
+                  example: 'lorem itsum'
+        400:
+          description: ERROR
+      produces:
+        - 'aplication/json'
+        - 'yml'
+
+    post:
+      tags:
+        - 'Article'
+      summary: 'Post Article'
+      description: 'get all article'
+      security:
+        - Token: []
+      consumes:
+        - 'aplication/json'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          description: 'Article Objct'
+          required: true
+          schema:
+            type: 'object'
+            properties:
+              title:
+                type: 'string'
+                example: 'lorem ipsum title'
+              body:
+                type: 'string'
+                example: 'lorem ipsum'
+      produces:
+        - 'aplication/json'
+
+      responses:
+        '201':
+          description: 'success create article'
+          schema:
+            type: 'object'
+            properties:
+              title:
+                type: 'string'
+                example: 'lorem ipsum title'
+              body:
+                type: 'string'
+                example: 'lorem ipsum'
+
+        '404':
+          description: 'Error create article'
+          schema:
+            type: 'object'
+            properties:
+              message:
+                type: 'string'
+                example: 'Fail To create Post'
+
+        '402':
+          description: 'Error create article'
+          schema:
+            type: 'object'
+            properties:
+              message:
+                type: 'string'
+                example: 'Need To Login'
+
+  /articles/{articleId}:
+    get:
+      tags:
+        - 'Article'
+      summary: 'Find article by ID'
+      description: 'Returns a single Article'
+      parameters:
+        - in: 'path'
+          name: 'articleId'
+          description: 'ID of article to return'
+          required: true
+          type: 'integer'
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'Successful find article by id'
+          schema:
+            type: 'object'
+            properties:
+              id:
+                type: 'integer'
+                example: 1
+              title:
+                type: 'string'
+                example: 'Lorem Ipsum'
+              body:
+                type: 'string'
+                example: 'Dolor sit amet'
+        '400':
+          description: 'Invalid ID supplied'
+        '404':
+          description: 'Article not found'
+
+    put:
+      tags:
+        - 'Article'
+      summary: 'Updated article'
+      description: 'This can only be done by the logged in user.'
+      operationId: 'updateUser'
+      security:
+        - Token: []
+      produces:
+        - 'application/json'
+      parameters:
+        - name: 'articleId'
+          in: 'path'
+          description: 'name that need to be updated'
+          required: true
+          type: 'string'
+        - in: 'body'
+          name: 'body'
+          description: 'Article Objct'
+          required: true
+          schema:
+            type: 'object'
+            properties:
+              title:
+                type: 'string'
+                example: 'lorem ipsum title'
+              body:
+                type: 'string'
+                example: 'lorem ipsum'
+
+      responses:
+        '200':
+          description: 'Successful find article by id'
+          schema:
+            type: 'object'
+            properties:
+              id:
+                type: 'integer'
+                example: 1
+              title:
+                type: 'string'
+                example: 'Lorem Ipsum'
+              body:
+                type: 'string'
+                example: 'Dolor sit amet'
+        '400':
+          description: 'Invalid user path'
+        '404':
+          description: 'Article not found'
+
+    delete:
+      tags:
+        - 'Article'
+      summary: 'Delete article by ID'
+      security:
+        - Token: []
+      description: 'Returns a single Article'
+      parameters:
+        - in: 'path'
+          name: 'articleId'
+          description: 'ID of article to return'
+          required: true
+          type: 'integer'
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'Successful delete article by id'
+          schema:
+            type: 'object'
+            properties:
+              message:
+                type: 'string'
+                example: 'success delete post'
+        '404':
+          description: 'failed delete article by id'
+          schema:
+            type: 'object'
+            properties:
+              message:
+                type: 'string'
+                example: 'post not found'
+
+securityDefinitions:
+  Token:
+    type: 'apiKey'
+    in: 'header'
+    name: 'Authorization'

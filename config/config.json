@@ -1,22 +1,22 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "password",
-    "database": "ch8_swagger_development",
+    "username": "farhan_binar",
+    "password": "farhan322",
+    "database": "swagger",
     "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
-    "username": "postgres",
-    "password": "password",
-    "database": "ch8_swagger_test",
+    "username": "farhan_binar",
+    "password": "farhan322",
+    "database": "challenge_ch6_test",
     "host": "localhost",
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "password",
-    "database": "ch8_swagger_production",
+    "username": "farhan_binar",
+    "password": "farhan322",
+    "database": "challenge_ch6_production",
     "host": "localhost",
     "dialect": "postgres"
   }
