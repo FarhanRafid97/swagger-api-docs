@@ -213,7 +213,7 @@
             "in": "path",
             "description": "name that need to be updated",
             "required": true,
-            "type": "string"
+            "type": "integer"
           },
           {
             "in": "body",
